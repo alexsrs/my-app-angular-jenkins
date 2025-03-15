@@ -1,6 +1,7 @@
 pipeline {
 environment {
     comando = "docker run -d -p 4200:4200"
+    DOCKER_BUILDKIT = '1'
   }
 agent {
 docker {
@@ -15,7 +16,9 @@ sh 'npm install' // Instala dependencias
     }
 stage('Build Docker Image') {
       steps {
-sh "docker build . -t my-app:${env.BUILD_NUMBER}"
+sh "docker buildx build . -t my-app:${env.BUILD_NUMBER}"
+
+
       }
     }
 stage('Deploy') {
