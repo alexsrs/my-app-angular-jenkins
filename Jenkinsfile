@@ -1,16 +1,27 @@
-pipeline { 
-    agent any
-
-    stages { 
-        stage('STAGE 00'){ 
-            steps{
-            echo "Pipeline Passo 1"
-            }
-        }
-            stage('STAGE 01'){ 
-            steps{
-            echo "Pipeline Passo 2"
-            }
-        } 
-    } 
+pipeline {
+environment {
+    comando = "dockerrun -d -p 4200:4200"
+  }
+agent {
+docker {
+image 'alpine-node-docker' // Imagem Customizada
+    }
+  } 
+stages {
+stage('Build') {
+      steps {
+sh 'npminstall' // Instala dependencias
+      }
+    }
+stage('Build Docker Image') {
+      steps {
+sh "docker build . -tmy-app:${env.BUILD_NUMBER}"
+      }
+    }
+stage('Deploy') {
+      steps {
+sh "${comando} --namemy-app my-app:${env.BUILD_NUMBER}" 
+      }
+    }
+  }
 }
