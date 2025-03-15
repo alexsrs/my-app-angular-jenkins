@@ -1,6 +1,6 @@
 pipeline {
 environment {
-    comando = "dockerrun -d -p 4200:4200"
+    comando = "sudo dockerrun -d -p 4200:4200"
   }
 agent {
 docker {
@@ -15,7 +15,7 @@ sh 'npminstall' // Instala dependencias
     }
 stage('Build Docker Image') {
       steps {
-sh "docker build . -tmy-app:${env.BUILD_NUMBER}"
+sh "sudo docker build . -tmy-app:${env.BUILD_NUMBER}"
       }
     }
 stage('Deploy') {
