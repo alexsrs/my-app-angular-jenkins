@@ -1,26 +1,31 @@
 pipeline {
-environment {
-    comando = "sudo docker run -d -p 4200:4200 -v $(which docker):/usr/bin/docker"
+  environment {
+    comando = "sudo docker run -d -p 4200:4200"
   }
-agent {
-docker {
-image 'alpine-node-docker' // Imagem Customizada
+  agent {
+    docker {
+      image 'alpine-node-docker' // Imagem Customizada
     }
   } 
-stages {
-stage('Build') {
+  stages {
+    stage('Check Docker') {
       steps {
-sh 'npminstall' // Instala dependencias
+        sh 'docker --version' // Verifica a versão do Docker
       }
     }
-stage('Build Docker Image') {
+    stage('Build') {
       steps {
-sh "sudo docker build . -t my-app:${env.BUILD_NUMBER}"
+        sh 'npm install' // Instala dependencias
       }
     }
-stage('Deploy') {
+    stage('Build Docker Image') {
       steps {
-sh "${comando} --name my-app my-app:${env.BUILD_NUMBER}" 
+        sh "sudo docker build . -t my-app:${env.BUILD_NUMBER}"
+      }
+    }
+    stage('Deploy') {
+      steps {
+        sh "${comando} --name my-app my-app:${env.BUILD_NUMBER}" 
       }
     }
   }
