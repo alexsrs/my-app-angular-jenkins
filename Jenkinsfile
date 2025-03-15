@@ -15,12 +15,12 @@ sh 'npminstall' // Instala dependencias
     }
 stage('Build Docker Image') {
       steps {
-sh "sudo docker build . -tmy-app:${env.BUILD_NUMBER}"
+sh "sudo docker build . -t my-app:${env.BUILD_NUMBER}"
       }
     }
 stage('Deploy') {
       steps {
-sh "${comando} --namemy-app my-app:${env.BUILD_NUMBER}" 
+sh "${comando} --name my-app my-app:${env.BUILD_NUMBER}" 
       }
     }
   }
