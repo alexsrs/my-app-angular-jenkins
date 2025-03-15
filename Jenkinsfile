@@ -1,6 +1,6 @@
 pipeline {
 environment {
-    comando = "dockerrun -d -p 4200:4200"
+    comando = "docker run -d -p 4200:4200"
   }
 agent {
 docker {
