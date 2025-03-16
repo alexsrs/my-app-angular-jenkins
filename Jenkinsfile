@@ -24,3 +24,4 @@ sh "${comando} --name my-app my-app:${env.BUILD_NUMBER}"
     }
   }
 }
+}
