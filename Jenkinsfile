@@ -16,9 +16,9 @@ sh 'npm install' // Instala dependencias
     }
 stage('Build Docker Image') {
       steps {
-sh "docker buildx build .  my-app:${env.BUILD_NUMBER}"
-
-
+        script {
+                    docker.build('my-app:${env.BUILD_NUMBER}')
+                }
       }
     }
 stage('Deploy') {
