@@ -1,7 +1,6 @@
 pipeline {
 environment {
     comando = "docker run -d -p 4200:4200"
-
 agent {
 docker {
 image 'alpine-node-docker' // Imagem Customizada
@@ -16,8 +15,6 @@ sh 'npm install' // Instala dependencias
 stage('Build Docker Image') {
       steps {
          sh "docker buildx build -t . -t my-app:${env.BUILD_NUMBER}"
-
-
       }
     }
 stage('Deploy') {
