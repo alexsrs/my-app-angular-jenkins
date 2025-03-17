@@ -8,6 +8,11 @@ image 'node:alpine' // Imagem Customizada
   }
   }
 stages {
+stage('Install Docker') {
+      steps {
+sh 'apk add --no-cache docker' // Instala Docker
+      }
+    }
 stage('Build') {
       steps {
 sh 'npm install' // Instala dependencias
