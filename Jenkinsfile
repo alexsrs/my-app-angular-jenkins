@@ -1,27 +1,27 @@
 pipeline {
-environment {
-    comando = "docker run -d -p 4200:4200"
+  environment {
+    comando = "docker run -d -p 4200:4200 -v /var/run/docker.sock:/var/run/docker.sock --network jenkins"
   }
-agent {
-docker {
-image 'alpine-node-docker' // Imagem Customizada
-args '-v /var/run/docker.sock:/var/run/docker.sock'
+  agent {
+    docker {
+      image 'alpine-node-docker' // Imagem Customizada com Docker CLI instalado
+      args '-v /var/run/docker.sock:/var/run/docker.sock' // Monta o socket do Docker no agente
     }
-  } 
-stages {
-stage('Build') {
+  }
+  stages {
+    stage('Build') {
       steps {
-sh 'npm install' // Instala dependencias
+        sh 'npm install' // Instala dependências
       }
     }
-stage('Build Docker Image') {
+    stage('Build Docker Image') {
       steps {
-sh "docker build . -t my-app:${env.BUILD_NUMBER}"
+        sh "docker build . -t my-app:${env.BUILD_NUMBER}"
       }
     }
-stage('Deploy') {
+    stage('Deploy') {
       steps {
-sh "${comando} --name my-app my-app:${env.BUILD_NUMBER}" 
+        sh "${comando} --name my-app my-app:${env.BUILD_NUMBER}"
       }
     }
   }
