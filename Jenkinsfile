@@ -5,7 +5,6 @@ environment {
 agent {
 docker {
 image 'alpine-node-docker' // Imagem Customizada
-args '-v /var/run/docker.sock:/var/run/docker.sock' // Mapeia o volume
   }
   }
 stages {
