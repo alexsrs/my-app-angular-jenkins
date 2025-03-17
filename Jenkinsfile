@@ -2,7 +2,7 @@ pipeline {
 environment {
     comando = "docker run -d -p 4200:4200"
   }
-agent {
+agent any {
 docker {
 image 'alpine-node-docker' // Imagem Customizada
   }
