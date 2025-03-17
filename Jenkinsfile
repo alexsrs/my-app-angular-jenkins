@@ -4,7 +4,7 @@ environment {
   }
 agent {
 docker {
-image 'alpine-node-docker' // Imagem Customizada
+image 'node:alpine' // Imagem Customizada
   }
   }
 stages {
