@@ -5,7 +5,7 @@ pipeline {
   agent {
     docker {
       image 'alpine-node-docker' // Imagem Customizada com Docker CLI instalado
-      args '-v /var/run/docker.sock:/var/run/docker.sock' // Monta o socket do Docker no agente
+      args '-v /var/run/docker.sock:/var/run/docker.sock --network jenkins' // Monta o socket do Docker no agente e define a rede
     }
   }
   stages {
