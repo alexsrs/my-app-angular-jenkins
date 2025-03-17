@@ -4,15 +4,10 @@ environment {
   }
 agent {
 docker {
-image 'node:alpine' // Imagem Customizada
-  }
-  }
-stages {
-stage('Install Docker') {
-      steps {
-sh 'apk add --no-cache docker' // Instala Docker
-      }
+image 'alpine-node-docker' // Imagem Customizada
     }
+  } 
+stages {
 stage('Build') {
       steps {
 sh 'npm install' // Instala dependencias
@@ -25,7 +20,7 @@ sh "docker build . -t my-app:${env.BUILD_NUMBER}"
     }
 stage('Deploy') {
       steps {
-sh "${comando} --name my-app my-app:${env.BUILD_NUMBER}"
+sh "${comando} --name my-app my-app:${env.BUILD_NUMBER}" 
       }
     }
   }
