@@ -1,6 +1,7 @@
 pipeline {
   environment {
     comando = "docker run -d -p 4200:4200"
+    DOCKER_BUILDKIT = 1
   }
   agent {
     docker {
