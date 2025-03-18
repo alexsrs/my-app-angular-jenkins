@@ -11,7 +11,7 @@ pipeline {
   stages {
     stage('Prepare') {
       steps {
-        sh 'addgroup -S docker && adduser jenkins docker'
+        sh 'sudo addgroup -S docker && sudo adduser jenkins docker'
       }
     }
     stage('Build') {
