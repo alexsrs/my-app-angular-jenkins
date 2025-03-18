@@ -6,12 +6,13 @@ pipeline {
     docker {
       image 'alpine-node-docker' // Imagem Customizada com Docker CLI instalado
       args '-v /var/run/docker.sock:/var/run/docker.sock'
+      user 'root'
     }
   }
   stages {
     stage('Prepare') {
       steps {
-        sh 'sudo addgroup -S docker && sudo adduser jenkins docker'
+        sh 'addgroup -S docker && adduser jenkins docker'
       }
     }
     stage('Build') {
