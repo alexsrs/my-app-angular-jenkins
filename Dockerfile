@@ -1,6 +1,4 @@
 FROM node:alpine
-USER root
-RUN apk add docker-cli
 WORKDIR /usr/src/app
 COPY . /usr/src/app
 RUN npm install -g @angular/cli
