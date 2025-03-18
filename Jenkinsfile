@@ -6,7 +6,7 @@ pipeline {
     docker {
       image 'alpine-node-docker' // Imagem Customizada com Docker CLI instalado
       args '-v /var/run/docker.sock:/var/run/docker.sock'
-    }netw
+    }
   }
   stages {
     stage('Build') {
