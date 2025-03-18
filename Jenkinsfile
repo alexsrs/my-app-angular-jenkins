@@ -9,6 +9,11 @@ pipeline {
     }
   }
   stages {
+    stage('Prepare') {
+      steps {
+        sh 'addgroup -S docker && adduser jenkins docker'
+      }
+    }
     stage('Build') {
       steps {
         sh 'npm install' // Instala dependências
