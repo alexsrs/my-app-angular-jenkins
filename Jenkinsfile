@@ -1,12 +1,10 @@
 pipeline {
   environment {
     comando = "docker run -d -p 4200:4200"
-    DOCKER_BUILDKIT = 1
   }
   agent {
     docker {
       image 'alpine-node-docker' // Imagem Customizada com Docker CLI instalado
-      args '-v /var/run/docker.sock:/var/run/docker.sock'
     }
   }
   stages {
