@@ -5,6 +5,7 @@ pipeline {
   agent {
     docker {
       image 'alpine-node-docker' // Imagem Customizada com Docker CLI instalado
+      args '--network jenkins' // Adicionar a rede Jenkins
     }
   }
   stages {
